@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model billinStatement {
+  id                           Int       @id @default(autoincrement())
+  forvalId                     String?
+  syshanId                     String?
+  fitId                        String?
+  supplyNumber                 String?
+  userName                     String?
+  status                       Int?
+  paymentMonth                 Int?
+  startDay                     Int?
+  endDay                       Int?
+  useAmount                    Int?
+  electricityCharge            Int?
+  electricityChargeGovernment  Int?
+  electricityChargeTax         Int?
+  recycledEnergy               Int?
+  recycledEnergyGovernment     Int?
+  recycledEnergyTax            Int?
+  expenses                     Int?
+  expensesGovernment           Int?
+  expensesTax                  Int?
+  government                   Int?
+  governmentGovernment         Int?
+  governmentTax                Int?
+  CO2Discharge                 String?
+  parentId                     String?
+  childId                      String?
+  created                      DateTime? @default(now())
+  updated                      DateTime? @updatedAt
+}
