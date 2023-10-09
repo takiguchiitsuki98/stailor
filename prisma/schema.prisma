@@ -11,12 +11,34 @@ datasource db {
   relationMode = "prisma"
 }
 
-model billinStatement {
+model Customer {
+  forvalId    String  @id
+  syshanId    String?
+  address     String?
+  postcode    String?
+  payment     String?
+  created     DateTime? @default(now())
+  updated     DateTime? @updatedAt
+}
+
+model Contract {
+  supplyNumber       String  @id
+  syshanId           String?
+  contractMenu       String?
+  contractCurrent    Int?
+  paymentMethod      String?
+  created            DateTime? @default(now())
+  updated            DateTime? @updatedAt
+  BillinStatement    BillinStatement[]
+}
+
+model BillinStatement {
   id                           Int       @id @default(autoincrement())
-  forvalId                     String?
-  syshanId                     String?
+  forvalId                     String
+  syshanId                     String
   fitId                        String?
-  supplyNumber                 String?
+  supplyNumber                 Contract  @relation(fields: [supplyNumberId], references: [supplyNumber])
+  supplyNumberId               String
   userName                     String?
   status                       Int?
   paymentMonth                 Int?

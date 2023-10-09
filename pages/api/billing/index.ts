@@ -9,12 +9,12 @@ export default async function handler(
     res: NextApiResponse<billinStatement[]>,
 ) {
     try {
-      // const query: any = {
-      //     include: {
-      //         group: true,
-      //     }
-      // }
-      const billings = await prisma.billinStatement.findMany();
+      const query: any = {
+          include: {
+            supplyNumber: true,
+          }
+      }
+      const billings = await prisma.billinStatement.findMany(query);
       res.status(200).json(billings);
     } catch (e) {
       console.error(e);
