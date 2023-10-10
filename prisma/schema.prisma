@@ -11,30 +11,44 @@ datasource db {
   relationMode = "prisma"
 }
 
-model billinStatement {
+model Customer {
+  forvalId    String  @id
+  syshanId    String?
+  address     String?
+  postcode    String?
+  payment     String?
+  created     DateTime? @default(now())
+  updated     DateTime? @updatedAt
+}
+
+model Contract {
+  supplyNumber       String  @id
+  syshanId           String?
+  contractMenu       String?
+  contractCurrent    Int?
+  paymentMethod      String?
+  created            DateTime? @default(now())
+  updated            DateTime? @updatedAt
+  BillinStatement    BillinStatement[]
+}
+
+model BillinStatement {
   id                           Int       @id @default(autoincrement())
-  forvalId                     String?
-  syshanId                     String?
+  forvalId                     String
+  syshanId                     String
   fitId                        String?
-  supplyNumber                 String?
+  supplyNumber                 Contract  @relation(fields: [supplyNumberId], references: [supplyNumber])
+  supplyNumberId               String
   userName                     String?
   status                       Int?
   paymentMonth                 Int?
   startDay                     Int?
   endDay                       Int?
+  productCode                  String?
   useAmount                    Int?
-  electricityCharge            Int?
-  electricityChargeGovernment  Int?
-  electricityChargeTax         Int?
-  recycledEnergy               Int?
-  recycledEnergyGovernment     Int?
-  recycledEnergyTax            Int?
-  expenses                     Int?
-  expensesGovernment           Int?
-  expensesTax                  Int?
+  totalAmount                  Int?
   government                   Int?
-  governmentGovernment         Int?
-  governmentTax                Int?
+  tax                          Int?
   CO2Discharge                 String?
   parentId                     String?
   childId                      String?
