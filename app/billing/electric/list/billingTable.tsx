@@ -81,8 +81,12 @@ export default function BillingTable({
     <TabContext value={tabValue}>
       <div>
         <TabList onChange={ChangeTab} aria-label="lab API tabs example">
-          <Tab label="一覧" value="1" />
-          <Tab label="差し戻し対象" value="2" />
+          <Tab label="未作成" value="1" />
+          <Tab label="全件" value="2" />
+          <Tab label="エラー" value="3" />
+          <Tab label="作成済み" value="4" />
+          <Tab label="未連携" value="5" />
+          <Tab label="連携済み" value="6" />
         </TabList>
       </div>
       <TabPanel value="1">
@@ -101,6 +105,66 @@ export default function BillingTable({
         </div>
       </TabPanel>
       <TabPanel value="2">
+        <div>
+          <div style={{ height: "max-content", width: "100%" }}>
+            <DataGrid
+              rows={billingList}
+              columns={columns}
+              getRowId={(list) => list.id}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={pageSizeOptions}
+              autoHeight
+            />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel value="3">
+        <div>
+          <div style={{ height: "max-content", width: "100%" }}>
+            <DataGrid
+              rows={billingList}
+              columns={columns}
+              getRowId={(list) => list.id}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={pageSizeOptions}
+              autoHeight
+            />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel value="4">
+        <div>
+          <div style={{ height: "max-content", width: "100%" }}>
+            <DataGrid
+              rows={billingList}
+              columns={columns}
+              getRowId={(list) => list.id}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={pageSizeOptions}
+              autoHeight
+            />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel value="5">
+        <div>
+          <div style={{ height: "max-content", width: "100%" }}>
+            <DataGrid
+              rows={billingList}
+              columns={columns}
+              getRowId={(list) => list.id}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={pageSizeOptions}
+              autoHeight
+            />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel value="6">
         <div>
           <div style={{ height: "max-content", width: "100%" }}>
             <DataGrid

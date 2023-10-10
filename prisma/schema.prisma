@@ -44,19 +44,11 @@ model BillinStatement {
   paymentMonth                 Int?
   startDay                     Int?
   endDay                       Int?
+  productCode                  String?
   useAmount                    Int?
-  electricityCharge            Int?
-  electricityChargeGovernment  Int?
-  electricityChargeTax         Int?
-  recycledEnergy               Int?
-  recycledEnergyGovernment     Int?
-  recycledEnergyTax            Int?
-  expenses                     Int?
-  expensesGovernment           Int?
-  expensesTax                  Int?
+  totalAmount                  Int?
   government                   Int?
-  governmentGovernment         Int?
-  governmentTax                Int?
+  tax                          Int?
   CO2Discharge                 String?
   parentId                     String?
   childId                      String?

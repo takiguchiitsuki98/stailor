@@ -5,6 +5,8 @@ import { billinStatement } from '@prisma/client';
 import { LoadingChip } from '../../../../components/common/LoadingChip';
 import { SelectSearchCode } from '../../../../components/element/SelectSearchCode';
 import BillingTable from './billingTable';
+import TotalDisplay from './totalDisplay';
+
 
 // TODO 後で修正
 const selectMonth = [
@@ -30,7 +32,6 @@ const billingList = await getBillingList();
       <div className="w-full items-left justify-between font-mono text-sm lg:flex">
         <Title>電気明細</Title>
       </div>
-      {/* <Text></Text> */}
       <div className="w-full items-left justify-between font-mono text-sm lg:flex">
         <Suspense fallback={<LoadingChip />}>
           <SelectSearchCode
@@ -39,10 +40,13 @@ const billingList = await getBillingList();
             listItems={selectMonth}
           />
         </Suspense>
+        <TotalDisplay /> 
       </div>
+      <br />
+      <br />
       <BillingTable
-          billingList={billingList}
-        />
+        billingList={billingList}
+      />
     </main>
   )
 }
