@@ -25,6 +25,7 @@ model Contract {
   supplyNumber       String  @id
   syshanId           String?
   supplyName         String?
+  supplyAdress       String?
   contractorName     String?
   contractDetails    String?
   contractCurrent    String?
@@ -44,9 +45,10 @@ model BillinStatement {
   userName                     String?
   status                       Int?
   paymentMonth                 Int?
+  useMonth                     Int?
   startDay                     Int?
   endDay                       Int?
-  productCode                  String?
+  chargeItemCode               String?
   useAmount                    Int?
   totalAmount                  Int?
   government                   Int?
