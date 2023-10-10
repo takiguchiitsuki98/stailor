@@ -18,7 +18,7 @@ export const SelectSearchCode = ({
       <SearchSelect placeholder={placeholder}>
         {listItems?.map((item) => (
           <SearchSelectItem value={String(item.code)}>
-            {String(item.code)} : {item.name}
+            {item.name}
           </SearchSelectItem>
         ))}
       </SearchSelect>
