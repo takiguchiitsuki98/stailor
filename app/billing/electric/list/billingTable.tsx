@@ -39,6 +39,14 @@ const columns = [
     width: 150,
   },
   {
+    field: "supplyNumber",
+    headerName: "供給地点名",
+    width: 200,
+    renderCell: (params: any) => {
+        return <div>{params.value.supplyName}</div>;
+    },
+  },
+  {
     field: "status",
     headerName: "ステータス",
     width: 100,
