@@ -13,9 +13,11 @@
     "@mui/x-data-grid": "^6.16.1",
     "@prisma/client": "^5.4.1",
     "@tremor/react": "^3.8.2",
+    "dayjs": "^1.11.10",
     "next": "13.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.47.0"
   },
   "devDependencies": {
     "@types/node": "^20",

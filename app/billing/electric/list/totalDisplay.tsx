@@ -12,7 +12,15 @@ import {
 } from '@tremor/react';
 import React from 'react'
 
-export default function TotalDisplay(){
+export default function TotalDisplay({
+  totalCount,
+  possibleCount,
+  totalAmount,
+}: {
+  totalCount: number;
+  possibleCount: number;
+  totalAmount: number;
+}){
   return (
     <Table className="mt-5">
       <TableHead>
@@ -24,10 +32,9 @@ export default function TotalDisplay(){
       </TableHead>
       <TableBody>
         <TableRow>
-            {/* // TODO 後で変数に置き換え */}
-          <TableCell>10件</TableCell>
-          <TableCell>20件</TableCell>
-          <TableCell>￥123,456,78</TableCell>
+          <TableCell>{totalCount}件</TableCell>
+          <TableCell>{possibleCount}件</TableCell>
+          <TableCell>￥{Number(totalAmount).toLocaleString()}</TableCell>
         </TableRow>
       </TableBody>
     </Table>

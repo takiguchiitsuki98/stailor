@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { billinStatement } from '@prisma/client';
+import { BillinStatement } from '@prisma/client';
 
 import { DataGrid, GridColDef, GridRowsProp, GridValueGetterParams } from "@mui/x-data-grid";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { useForm, Controller } from "react-hook-form";
 
 const columns = [
   {
@@ -70,15 +71,44 @@ const columns = [
   },
 ];
 
+interface SubmitData {
+  myFavoriteFoods: string[];
+}
+
 export default function BillingTable({
   billingList,
 }: {
-  billingList: billinStatement[];
+  billingList: BillinStatement[];
 }) {
   const [tabValue, setTabValue] = useState("1");
   const ChangeTab = (event: any, newValue: string) => {
     setTabValue(newValue);
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<SubmitData>({ mode: "onChange" })
+
+  let filteredList = billingList;
+  // 未作成
+  if (tabValue === "1") {
+    filteredList = filteredList.filter((billing => billing.status === 0));
+  // エラー
+  } else if (tabValue === "3") {
+    filteredList = filteredList.filter((billing => billing.status === 9));
+  // 作成済み
+  } else if (tabValue === "4") {
+    filteredList = filteredList.filter((billing => billing.status === 1 || billing.status === 2));
+  // 未連携
+  } else if (tabValue === "5") {
+    filteredList = filteredList.filter((billing => billing.status === 1));      
+  // 連携済み
+  } else if (tabValue === "6") {
+    filteredList = filteredList.filter((billing => billing.status === 2));      
+  }
+
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
     page: 0,
@@ -101,7 +131,7 @@ export default function BillingTable({
         <div>
           <div style={{ height: "max-content", width: "100%" }}>
             <DataGrid
-              rows={billingList}
+              rows={filteredList}
               columns={columns}
               getRowId={(list) => list.id}
               paginationModel={paginationModel}
@@ -116,7 +146,7 @@ export default function BillingTable({
         <div>
           <div style={{ height: "max-content", width: "100%" }}>
             <DataGrid
-              rows={billingList}
+              rows={filteredList}
               columns={columns}
               getRowId={(list) => list.id}
               paginationModel={paginationModel}
@@ -131,7 +161,7 @@ export default function BillingTable({
         <div>
           <div style={{ height: "max-content", width: "100%" }}>
             <DataGrid
-              rows={billingList}
+              rows={filteredList}
               columns={columns}
               getRowId={(list) => list.id}
               paginationModel={paginationModel}
@@ -146,7 +176,7 @@ export default function BillingTable({
         <div>
           <div style={{ height: "max-content", width: "100%" }}>
             <DataGrid
-              rows={billingList}
+              rows={filteredList}
               columns={columns}
               getRowId={(list) => list.id}
               paginationModel={paginationModel}
@@ -161,7 +191,7 @@ export default function BillingTable({
         <div>
           <div style={{ height: "max-content", width: "100%" }}>
             <DataGrid
-              rows={billingList}
+              rows={filteredList}
               columns={columns}
               getRowId={(list) => list.id}
               paginationModel={paginationModel}
@@ -176,7 +206,7 @@ export default function BillingTable({
         <div>
           <div style={{ height: "max-content", width: "100%" }}>
             <DataGrid
-              rows={billingList}
+              rows={filteredList}
               columns={columns}
               getRowId={(list) => list.id}
               paginationModel={paginationModel}
