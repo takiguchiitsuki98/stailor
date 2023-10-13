@@ -13,9 +13,14 @@
     "@mui/x-data-grid": "^6.16.1",
     "@prisma/client": "^5.4.1",
     "@tremor/react": "^3.8.2",
+    "@types/downloadjs": "^1.4.4",
+    "dayjs": "^1.11.10",
+    "downloadjs": "^1.4.7",
     "next": "13.5.4",
+    "pdf-lib": "^1.17.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.47.0"
   },
   "devDependencies": {
     "@types/node": "^20",
