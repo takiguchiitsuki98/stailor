@@ -12,10 +12,16 @@ datasource db {
 }
 
 model Customer {
-  forvalId      String  @id
+  parentId      String @id
+  forvalId      String?
   syshanId      String?
-  customerName  String?
-  address       String?
+  billingCode   String?
+  customerName1 String?
+  customerName2 String?
+  honorific     String?
+  address1      String?
+  address2      String?
+  telephone     String?
   postcode      String?
   created       DateTime? @default(now())
   updated       DateTime? @updatedAt
@@ -23,6 +29,7 @@ model Customer {
 
 model Contract {
   supplyNumber       String  @id
+  childId            String?
   syshanId           String?
   supplyName         String?
   supplyAdress       String?
@@ -62,9 +69,11 @@ model BillinStatement {
 
 model Merchandise {
   chargeItemCode  String  @id
+  productCode     String?
   productName     String?
   unit            String?
   unitPrice       Int?
+  taxRate         Int?
   position        Int?
   created         DateTime? @default(now())
   updated         DateTime? @updatedAt
