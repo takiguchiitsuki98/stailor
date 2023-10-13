@@ -1,5 +1,6 @@
-import Image from 'next/image'
-import { Card, Title, Text, Flex } from '@tremor/react';
+import Image from "next/image";
+import { Card, Title, Text, Flex } from "@tremor/react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -8,9 +9,9 @@ export default function Home() {
         トップページ(仮)
       </div>
       <div className="z-10 max-w-5xl w-full font-bold text-2xl lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center  lg:static lg:w-auto  lg:bg-gray-200 lg:p-4 ">
+        <Link href='./csv' className="fixed left-0 top-0 flex w-full justify-center  lg:static lg:w-auto  lg:bg-gray-200 lg:p-4 ">
           CSV読み込み
-        </p>
+        </Link>
       </div>
       <div className="z-10 max-w-5xl w-full font-bold text-2xl lg:flex">
         <Flex>
@@ -18,5 +19,5 @@ export default function Home() {
         </Flex>
       </div>
     </main>
-  )
+  );
 }
