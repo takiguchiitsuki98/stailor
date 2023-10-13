@@ -21,7 +21,7 @@ export default function CsvUpload() {
             .split(/,|\n|\r\n|\r/);
 
           headers.pop();
-          console.log(headers);
+          // console.log(headers);
 
           // csvファイルの1行目はデータではないので1行目をsliceしたデータのみ配列に変換する
           // splitで改行(\rと\n)を堺にして一件分のデータを配列に変換する
@@ -34,7 +34,7 @@ export default function CsvUpload() {
           for (let i of result1) {
             arr.push(i.split(/,/));
           }
-          console.log(arr);
+          // console.log(arr);
 
           const newArr: { [prop: string]: any }[] = [];
 
@@ -58,7 +58,7 @@ export default function CsvUpload() {
             }
           }
 
-          console.log(newArr);
+          // console.log(newArr);
 
           // 親IDがELから始まるレコードのみを抽出
           const ELArr = newArr.filter(function (obj) {
@@ -73,7 +73,7 @@ export default function CsvUpload() {
               productArr.push(i["料金項目コード１"]);
             }
           }
-          console.log(productArr);
+          // console.log(productArr);
 
           // 親IDごとのオプションをオブジェクトに格納する
           const parentObj: any = {};
@@ -143,7 +143,7 @@ export default function CsvUpload() {
             }
           }
 
-          console.log(parentObj);
+          // console.log(parentObj);
 
           // 明細テーブルに取り込むレコードのみ抽出
           const filterdArr = newArr.filter(function (obj) {
@@ -155,16 +155,16 @@ export default function CsvUpload() {
               obj["請求額（税込）"] !== 0
             );
           });
-          console.log(filterdArr);
+          // console.log(filterdArr);
 
           // 明細データに契約プランなどのオプションを追加する
           for (let i of filterdArr) {
             Object.assign(i, parentObj[i["親ID"]]);
           }
 
-          console.log(filterdArr);
+          // console.log(filterdArr);
 
-          console.log(filterdArr[3]["顧客コード"]);
+          // console.log(filterdArr[3]["顧客コード"]);
 
           const getData = async (
             obj: {
@@ -175,13 +175,13 @@ export default function CsvUpload() {
               cache: "no-store",
             });
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
 
             for (let j of obj) {
               for (let i of data) {
-                if (i.forvalId === j["顧客コード"]) {
+                if (i.parentId === j["親ID"]) {
                   j["syshanId"] = i.syshanId;
-                  j["userName"] = i.customerName;
+                  j["userName"] = i.customerName1;
                   j["status"] = 0;
                   break;
                 } else {
@@ -190,7 +190,7 @@ export default function CsvUpload() {
               }
             }
 
-            console.log(JSON.stringify(filterdArr[0]));
+            // console.log(JSON.stringify(filterdArr[0]));
 
             fetch("http://localhost:3000/api/csv/post", {
               method: "POST",
@@ -204,7 +204,7 @@ export default function CsvUpload() {
 
           getData(filterdArr);
 
-          console.log(filterdArr);
+          // console.log(filterdArr);
 
           // 加工したcsvデータをpostメソッドで明細テーブルにinsertするapi処理を呼び出す
 
@@ -214,7 +214,7 @@ export default function CsvUpload() {
         read.readAsText(file.files[0], "ANSI");
       });
     } else {
-      console.log("flie type wrong");
+      // console.log("flie type wrong");
     }
     file.value = "";
   };
