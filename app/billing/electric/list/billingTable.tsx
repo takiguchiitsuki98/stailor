@@ -16,6 +16,9 @@ import {
 } from '@tremor/react';
 
 import { createPdf } from './createPdf';
+import { getPdfOutPutList } from './pdfOutput';
+
+
 
 // 明細作成対象
 interface PdfData {
@@ -46,9 +49,9 @@ export default function BillingTable({
       renderCell: (params: any) => {
         return (
           <input
-            id={params.id}
+            id={params.row.syshanId}
             type="checkbox"
-            value={params.id}
+            value={params.row.syshanId}
             defaultChecked={false}
             disabled={false}
           {...register("syshanIDs")}
@@ -142,8 +145,10 @@ export default function BillingTable({
     }
     // alert("SubmitHandler : " + data.syshanIDs)
 
-    // PDF作成 // TODO 後で引数渡しに修正
-    await createPdf();
+    // PDF出力情報を取得
+    const pdfOutPutList = await getPdfOutPutList(data.syshanIDs);
+    // PDF作成
+    await createPdf(pdfOutPutList);
   };
 
   return (

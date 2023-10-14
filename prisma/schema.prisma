@@ -14,7 +14,7 @@ datasource db {
 model Customer {
   parentId      String @id
   forvalId      String?
-  syshanId      String?
+  syshanId      String @unique
   billingCode   String?
   customerName1 String?
   customerName2 String?
@@ -25,6 +25,7 @@ model Customer {
   postcode      String?
   created       DateTime? @default(now())
   updated       DateTime? @updatedAt
+  BillinStatement    BillinStatement[]
 }
 
 model Contract {
@@ -45,6 +46,7 @@ model Contract {
 model BillinStatement {
   id                           Int       @id @default(autoincrement())
   forvalId                     String
+  syshanInfo                   Customer  @relation(fields: [syshanId], references: [syshanId])
   syshanId                     String
   fitId                        String?
   supplyNumber                 Contract  @relation(fields: [supplyNumberId], references: [supplyNumber])
@@ -55,7 +57,8 @@ model BillinStatement {
   useMonth                     Int?
   startDay                     Int?
   endDay                       Int?
-  chargeItemCode               String?
+  chargeItemCode               Merchandise @relation(fields: [chargeItemCodeId], references: [chargeItemCode])
+  chargeItemCodeId             String
   useAmount                    Int?
   totalAmount                  Int?
   government                   Int?
@@ -77,4 +80,5 @@ model Merchandise {
   position        Int?
   created         DateTime? @default(now())
   updated         DateTime? @updatedAt
+  BillinStatement    BillinStatement[]
 }
