@@ -29,6 +29,7 @@ export default async function ElectricBillingList({
 
   // const [billingList, setBillingList] = useState();
   console.log("searchParams !!!!!!!!!!!! ", searchParams)
+  // TODO データ都合で仮で設定、後で直す
   const thisMonth ='202307';
   // const thisMonth = searchParams.q ? searchParams.q : dayjs().format("YYYYMM");
   console.log("thisMonth !!!!!!!!!!!! ", thisMonth)
